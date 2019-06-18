@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import pypyodbc
 app = Flask(__name__)
-connection = pypyodbc.connect("Driver={ODBC Driver 13 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
+connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
 
 @app.route('/')
 def hello_world():
