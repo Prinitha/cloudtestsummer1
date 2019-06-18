@@ -28,7 +28,7 @@ def display_range():
     start_time = time()
     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
-    sql = 'select latitude, longitude, [time], depthError from quake6 where longitude>? and depthError between ? and ? '
+    sql = 'select latitude, longitude, [time], depthError from quake6 where ((longitude > ?) and (depthError between ? and ?)) '
     # print(sql)
     cursor.execute(sql, (long_value, depth_range1, depth_range2))
     rows = cursor.fetchall()
