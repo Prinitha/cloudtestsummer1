@@ -20,7 +20,7 @@ def random_queries():
     start_time = time()
     cursor = connection.cursor()
     for i in range(0, int(query_limit)):
-        cursor.execute('select * from all_month order by rand() limit 1')
+        cursor.execute('select TOP 1 * from all_month order by rand()')
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the random queries is : ' + "%.4f" % time_taken + " seconds")

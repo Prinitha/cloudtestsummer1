@@ -16,7 +16,7 @@
         There are totally {{ count }} number of earthquakes in my database.
     </h1>
     <form name="random_queries" action = "/random_queries" method = "get" enctype = "multipart/form-data">
-        <input type="text" name="nqueries">
+        Enter the number of random queries: <input type="text" name="nqueries">
         <input type="Submit" value="Run Random Queries">
     </form>
     {% with messages = get_flashed_messages() %}
