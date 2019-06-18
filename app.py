@@ -26,9 +26,11 @@ def display_range():
     low_range = request.args['low_range']
     high_range = request.args['high_range']
     start_time = time()
-    sql = 'select TOP ? mag, latitude, longitude from all_month where mag between ? and ?'
-    cursor.execute(sql, (no_queries, low_range, high_range))
+    sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from all_month where mag between ? and ?'
+    print(sql)
+    cursor.execute(sql, (low_range, high_range))
     rows = cursor.fetchall()
+    print(rows)
     # cache.set(magnitude, str(rows))
     # flash('In DB Query' + str())
     end_time = time()
