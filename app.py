@@ -1,4 +1,5 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
+import random
 import pypyodbc
 from time import time
 app = Flask(__name__)
@@ -33,9 +34,9 @@ def query_specific():
     higher_limit = request.args['high']
     start_time = time()
     for i in range(0, int(query_limit)):
-        sql = 'select * from all_month where mag between ? and ? '
-        cursor.execute(sql, (lower_limit, higher_limit))
-        rows = cursor.fetchall()
+        magnitude = random.uniform(float(lower_limit), float(higher_limit))
+        sql = 'select * from all_month where mag>=? '
+        cursor.execute(sql, (magnitude,))
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
