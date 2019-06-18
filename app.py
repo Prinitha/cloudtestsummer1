@@ -9,6 +9,7 @@ def hello_world():
     cursor.execute("select count(*) from all_month")
     rows = cursor.fetchall()
     count = rows[0][0]
+    print(count)
     return render_template('index.html', count=count)
 
 
