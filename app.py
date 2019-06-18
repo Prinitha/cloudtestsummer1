@@ -15,22 +15,24 @@ cache = redis.StrictRedis(host=host_name, port=6380, password=password, ssl=True
 
 @app.route('/')
 def hello_world():
-    cursor.execute("select count(*) from all_months")
+    cursor.execute("select count(*) from quake6")
     rows = cursor.fetchall()
     count = rows[0][0]
     return render_template('index.html', count=count)
 
-@app.route('/display_range')
+@app.route('/my_display_range_5')
 def display_range():
-    no_queries = request.args['no_queries']
-    low_range = request.args['low_range']
-    high_range = request.args['high_range']
+    long_value = request.args['long']
+    depth_range1 = request.args['depth_range1']
+    depth_range2 = request.args['depth_range2']
     start_time = time()
-    sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from all_months where mag between ? and ?'
-    print(sql)
-    cursor.execute(sql, (low_range, high_range))
+    # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+    # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+    sql = 'select latitude, longitude, [time], depthError from quake6 where longitude>? and depthError between ? and ? '
+    # print(sql)
+    cursor.execute(sql, (long_value, depth_range1, depth_range2))
     rows = cursor.fetchall()
-    print(rows)
+    # print(rows)
     # cache.set(magnitude, str(rows))
     # flash('In DB Query' + str())
     end_time = time()
@@ -39,12 +41,33 @@ def display_range():
     return render_template("testpage.html", rows=rows)
     # return redirect(url_for('hello_world'))
 
+
+
+# @app.route('/display_range')
+# def display_range():
+#     no_queries = request.args['no_queries']
+#     low_range = request.args['low_range']
+#     high_range = request.args['high_range']
+#     start_time = time()
+#     sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+#     print(sql)
+#     cursor.execute(sql, (low_range, high_range))
+#     rows = cursor.fetchall()
+#     print(rows)
+#     # cache.set(magnitude, str(rows))
+#     # flash('In DB Query' + str())
+#     end_time = time()
+#     time_taken = (end_time - start_time)
+#     flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
+#     return render_template("testpage.html", rows=rows)
+#     # return redirect(url_for('hello_world'))
+
 @app.route('/random_queries')
 def random_queries():
     query_limit = request.args['nqueries']
     start_time = time()
     for i in range(0, int(query_limit)):
-        cursor.execute('select TOP 1 * from all_months order by rand()')
+        cursor.execute('select TOP 1 * from quake6 order by rand()')
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the random queries is : ' + "%.4f" % time_taken + " seconds")
@@ -61,7 +84,7 @@ def query_specific():
     for i in range(0, int(query_limit)):
         magnitude = random.uniform(float(lower_limit), float(higher_limit))
         if not cache.get(magnitude):
-            sql = 'select * from all_months where mag>=? '
+            sql = 'select * from quake6 where mag>=? '
             cursor.execute(sql, (magnitude,))
             rows = cursor.fetchall()
             cache.set(magnitude, str(rows))
