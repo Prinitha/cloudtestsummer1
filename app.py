@@ -20,6 +20,22 @@ def hello_world():
     count = rows[0][0]
     return render_template('index.html', count=count)
 
+@app.route('/display_range')
+def display_range():
+    no_queries = request.args['no_queries']
+    low_range = request.args['low_range']
+    high_range = request.args['high_range']
+    start_time = time()
+    sql = 'select TOP ? mag, latitude, longitude from all_month where mag between ? and ?'
+    cursor.execute(sql, (no_queries, low_range, high_range))
+    rows = cursor.fetchall()
+    # cache.set(magnitude, str(rows))
+    # flash('In DB Query' + str())
+    end_time = time()
+    time_taken = (end_time - start_time)
+    flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
+    return render_template("testpage.html", rows=rows)
+    # return redirect(url_for('hello_world'))
 
 @app.route('/random_queries')
 def random_queries():

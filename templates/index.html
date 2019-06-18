@@ -25,6 +25,14 @@
         <input type="Submit" value="Run Specific Queries">
     </form>
 <br/><br/>
+
+<br/><br/>
+<form name="display_range" action = "/display_range" method = "get" enctype = "multipart/form-data">
+        Enter the number of queries: <input type="text" name="no_queries"> Low Range: <input type="text" name="low_range"> High Range: <input type="text" name="high_range">
+        <input type="Submit" value="Run">
+    </form>
+<br/><br/>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
