@@ -7,7 +7,7 @@ app = Flask(__name__)
 connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
 cursor = connection.cursor()
 app.secret_key = "Secret!!!!"
-host_name = 'cloudredis.redis.cache.windows.net:6380'
+host_name = 'cloudredis.redis.cache.windows.net'
 password = 'Nbez9mJY7hUbFWLFAgWp7OJXyku9XIXep7waffZg4z8='
 cache = redis.StrictRedis(host=host_name, port=6380, password=password, ssl=True)
 
