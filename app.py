@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request, redirect, url_for
 import random
 import pypyodbc
 import redis
+import ast
 from time import time
 app = Flask(__name__)
 connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
@@ -43,9 +44,11 @@ def query_specific():
         if not cache.get(magnitude):
             sql = 'select * from all_month where mag>=? '
             cursor.execute(sql, (magnitude,))
-            cache.set(magnitude, cursor.fetchall())
+            rows = cursor.fetchall()
+            cache.set(magnitude, str(rows))
         else:
-            rows = cache.get(magnitude)
+            rows_string = cache.get(magnitude)
+            rows = ast.literal_eval(rows_string)
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
