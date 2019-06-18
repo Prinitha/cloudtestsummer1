@@ -68,6 +68,7 @@ def query_specific():
             flash('In DB Query'+str(magnitude))
         else:
             rows_string = cache.get(magnitude)
+            # rows = ast.literal_eval(rows_string)
             flash('In Cache' + str(magnitude))
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
