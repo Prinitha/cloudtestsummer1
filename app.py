@@ -54,7 +54,8 @@ def query_specific():
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
-    return redirect(url_for('hello_world'))
+    # return redirect(url_for('hello_world'))
+    return render_template('results.html')
 
 
 if __name__ == '__main__':
