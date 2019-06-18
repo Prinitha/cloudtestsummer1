@@ -46,7 +46,7 @@ def query_specific():
             sql = 'select * from all_month where mag>=? '
             cursor.execute(sql, (magnitude,))
             rows = cursor.fetchall()
-            cache.set(magnitude, str(rows))
+            # cache.set(magnitude, str(rows))
             flash('In DB Query')
         else:
             rows_string = cache.get(magnitude)
