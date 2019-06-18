@@ -46,9 +46,10 @@ def query_specific():
             cursor.execute(sql, (magnitude,))
             rows = cursor.fetchall()
             cache.set(magnitude, str(rows))
+            flash('In DB Query')
         else:
             rows_string = cache.get(magnitude)
-            rows = ast.literal_eval(rows_string)
+            flash('In Cache')
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
