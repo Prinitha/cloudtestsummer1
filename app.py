@@ -18,12 +18,27 @@ def hello_world():
 def random_queries():
     query_limit = request.args['nqueries']
     start_time = time()
-    print(query_limit)
     for i in range(0, int(query_limit)):
         cursor.execute('select TOP 1 * from all_month order by rand()')
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the random queries is : ' + "%.4f" % time_taken + " seconds")
+    return redirect(url_for('hello_world'))
+
+
+@app.route('/query_specific')
+def query_specific():
+    query_limit = request.args['nqueries']
+    lower_limit = request.args['low']
+    higher_limit = request.args['high']
+    start_time = time()
+    for i in range(0, int(query_limit)):
+        sql = 'select * from all_month where mag between ? and ? '
+        cursor.execute(sql, (lower_limit, higher_limit))
+        rows = cursor.fetchall()
+    end_time = time()
+    time_taken = (end_time - start_time) / int(query_limit)
+    flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
     return redirect(url_for('hello_world'))
 
 

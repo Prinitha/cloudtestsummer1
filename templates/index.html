@@ -19,6 +19,12 @@
         Enter the number of random queries: <input type="text" name="nqueries">
         <input type="Submit" value="Run Random Queries">
     </form>
+<br/><br/>
+<form name="query_specific" action = "/query_specific" method = "get" enctype = "multipart/form-data">
+        Enter the number of random queries: <input type="text" name="nqueries"> Low: <input type="text" name="low"> High: <input type="text" name="high">
+        <input type="Submit" value="Run Specific Queries">
+    </form>
+<br/><br/>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
