@@ -4,6 +4,7 @@ from time import time
 app = Flask(__name__)
 connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
 cursor = connection.cursor()
+app.secret_key = "Secret!!!!"
 
 @app.route('/')
 def hello_world():
