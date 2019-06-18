@@ -15,7 +15,7 @@ cache = redis.StrictRedis(host=host_name, port=6380, password=password, ssl=True
 
 @app.route('/')
 def hello_world():
-    cursor.execute("select count(*) from all_month")
+    cursor.execute("select count(*) from all_months")
     rows = cursor.fetchall()
     count = rows[0][0]
     return render_template('index.html', count=count)
@@ -26,7 +26,7 @@ def display_range():
     low_range = request.args['low_range']
     high_range = request.args['high_range']
     start_time = time()
-    sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from all_month where mag between ? and ?'
+    sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from all_months where mag between ? and ?'
     print(sql)
     cursor.execute(sql, (low_range, high_range))
     rows = cursor.fetchall()
@@ -44,7 +44,7 @@ def random_queries():
     query_limit = request.args['nqueries']
     start_time = time()
     for i in range(0, int(query_limit)):
-        cursor.execute('select TOP 1 * from all_month order by rand()')
+        cursor.execute('select TOP 1 * from all_months order by rand()')
     end_time = time()
     time_taken = (end_time - start_time) / int(query_limit)
     flash('The Average Time taken to execute the random queries is : ' + "%.4f" % time_taken + " seconds")
@@ -61,7 +61,7 @@ def query_specific():
     for i in range(0, int(query_limit)):
         magnitude = random.uniform(float(lower_limit), float(higher_limit))
         if not cache.get(magnitude):
-            sql = 'select * from all_month where mag>=? '
+            sql = 'select * from all_months where mag>=? '
             cursor.execute(sql, (magnitude,))
             rows = cursor.fetchall()
             cache.set(magnitude, str(rows))
