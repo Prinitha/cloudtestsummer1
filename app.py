@@ -39,8 +39,9 @@ def query_specific():
     lower_limit = request.args['low']
     higher_limit = request.args['high']
     start_time = time()
+    magnitude = random.uniform(float(lower_limit), float(higher_limit))
     for i in range(0, int(query_limit)):
-        magnitude = random.uniform(float(lower_limit), float(higher_limit))
+        # magnitude = random.uniform(float(lower_limit), float(higher_limit))
         if not cache.get(magnitude):
             sql = 'select * from all_month where mag>=? '
             cursor.execute(sql, (magnitude,))
