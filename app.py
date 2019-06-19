@@ -112,7 +112,7 @@ def query_specific():
     for i in range(0, int(query_limit)):
         magnitude = random.uniform(float(lower_limit), float(higher_limit))
         if not cache.get(magnitude):
-            sql = 'select * from quake6 where mag>=? '
+            sql = 'select * from quake6 where depthError > ? '
             cursor.execute(sql, (magnitude,))
             rows = cursor.fetchall()
             cache.set(magnitude, str(rows))
