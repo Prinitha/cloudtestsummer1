@@ -48,8 +48,10 @@ def my_query_specific():
     depth_range1 = request.args['depth_range1']
     depth_range2 = request.args['depth_range2']
     # start_time = time()
+    j=0
     # magnitude = random.uniform(float(lower_limit), float(higher_limit))
     for i in range(0, int(no_of_queries)):
+
         # magnitude = random.uniform(float(depth_range1), float(depth_range2))
         # if not cache.get(magnitude):
         start_time = time()
@@ -64,7 +66,8 @@ def my_query_specific():
         #     flash('In Cache ' + str(magnitude))
         end_time = time()
         time_taken = (end_time - start_time) / int(no_of_queries)
-        flash(rows[i])
+        flash(rows[j])
+        j = j+1
         flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
     return redirect(url_for('hello_world'))
     # return render_template('testpage6.html', rows=rows)
