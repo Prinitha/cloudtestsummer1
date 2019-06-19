@@ -14,7 +14,19 @@
     NAGARAJAN, PRINITHA<br/>
     The results are:<br/><br/>
 </h1>
-
+<table>
+    <tr>
+        
+        <th> depthError </th>
+    </tr>
+    {% for row in rows %}
+        <tr>
+            <td>
+                {{ row[0] }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
