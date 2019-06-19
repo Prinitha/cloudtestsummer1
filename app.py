@@ -44,12 +44,12 @@ def display_range():
 
 @app.route('/my_query_specific')
 def query_specific():
-    query_limit = request.args['nqueries']
+    no_of_queries = request.args['no_of_queries']
     depth_range1 = request.args['depth_range1']
     depth_range2 = request.args['depth_range2']
     # start_time = time()
     # magnitude = random.uniform(float(lower_limit), float(higher_limit))
-    for i in range(0, int(query_limit)):
+    for i in range(0, int(no_of_queries)):
         # magnitude = random.uniform(float(depth_range1), float(depth_range2))
         # if not cache.get(magnitude):
         start_time = time()
@@ -63,10 +63,10 @@ def query_specific():
         #     # rows = ast.literal_eval(rows_string)
         #     flash('In Cache ' + str(magnitude))
         end_time = time()
-        time_taken = (end_time - start_time) / int(query_limit)
+        time_taken = (end_time - start_time) / int(no_of_queries)
     flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
     # return redirect(url_for('hello_world'))
-    return render_template('results.html', rows=rows)
+    return render_template('testpage6.html', rows=rows)
 
 # @app.route('/display_range')
 # def display_range():
