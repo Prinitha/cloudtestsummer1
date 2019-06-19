@@ -67,7 +67,7 @@ def my_query_specific():
         end_time = time()
         time_taken = (end_time - start_time) / int(no_of_queries)
         print("**********", rows)
-        flash(rows[0][0] + rows[1][0] + 'The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
+        flash(str(rows[0][0]) + str(rows[1][0]) + 'The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
     return redirect(url_for('hello_world'))
     # return render_template('testpage6.html', rows=rows)
 
