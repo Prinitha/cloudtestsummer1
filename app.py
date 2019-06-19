@@ -66,8 +66,8 @@ def my_query_specific():
         #     flash('In Cache ' + str(magnitude))
         end_time = time()
         time_taken = (end_time - start_time) / int(no_of_queries)
-        flash(rows[i])
-        flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
+        print("**********", rows)
+        flash(rows[0][0] + rows[1][0] + 'The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
     return redirect(url_for('hello_world'))
     # return render_template('testpage6.html', rows=rows)
 
