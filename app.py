@@ -57,7 +57,7 @@ def my_query_specific():
         cursor.execute(sql, (depth_range1, depth_range2))
         rows = cursor.fetchall()
         # cache.set(magnitude, str(rows))
-        flash('In DB Query '+str(rows[0][0]))
+        # flash('In DB Query '+str(rows[0][0]))
         # else:
         #     rows_string = cache.get(magnitude)
         #     # rows = ast.literal_eval(rows_string)
@@ -65,8 +65,8 @@ def my_query_specific():
         end_time = time()
         time_taken = (end_time - start_time) / int(no_of_queries)
         flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
-    # return redirect(url_for('hello_world'))
-    return render_template('testpage6.html', rows=rows)
+    return redirect(url_for('hello_world'))
+    # return render_template('testpage6.html', rows=rows)
 
 # @app.route('/display_range')
 # def display_range():
