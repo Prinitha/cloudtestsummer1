@@ -43,7 +43,7 @@ def display_range():
 
 
 @app.route('/my_query_specific')
-def query_specific():
+def my_query_specific():
     no_of_queries = request.args['no_of_queries']
     depth_range1 = request.args['depth_range1']
     depth_range2 = request.args['depth_range2']
