@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pypyodbc.connect(
     "Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,"
     "1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,"
-    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
+    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;")
 
 
 # redis_connect_dict = {}
