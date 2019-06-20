@@ -93,7 +93,16 @@ def my_display_range_6():
 " end As 'PercentVote',"\
 "count(*) as Number " \
 "from StateVoting" \
-" group by 'PercentVote'"
+" group by " \
+"case " \
+		   " when PercentVote >=40 and PercentVote <=45 then \'40-45\'" \
+		   " when PercentVote >=45.01  and PercentVote <= 50    then \'45-50\'"\
+           " when PercentVote >= 50.01 and PercentVote <= 55   then \'50-55\' "\
+           " when PercentVote >= 55.01 and PercentVote <= 60  then \'55-60\' "\
+           " when PercentVote >= 60.01 and PercentVote <= 65  then \'60-65\' "\
+		   " when PercentVote >= 65.01 and PercentVote <= 70  then \'65-70\' " \
+		   " when PercentVote >= 70.01 and PercentVote <= 75  then \'70-75\' " \
+"end;"
 
     cursor.execute(sql, )
     rows = cursor.fetchall()
