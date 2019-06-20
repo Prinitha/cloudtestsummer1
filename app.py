@@ -92,7 +92,7 @@ def my_display_range_6():
 		   " when PercentVote >= 70.01 and PercentVote <= 75  then \"70-75\" "\
 " end As 'PercentVote',"\
 "count(*) as Number " \
-"from StateVotingClean" \
+"from StateVoting" \
 " group by " \
 "case " \
 		   " when PercentVote >=40 and PercentVote <=45 then \"40-45\"" \
