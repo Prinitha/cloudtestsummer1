@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = pypyodbc.connect(
     "Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,"
     "1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,"
-    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;")
+    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 
 
 # redis_connect_dict = {}
@@ -78,7 +78,7 @@ def question1_execute():
         population_values.append(r[1])
         # state = r[0]
         # population_values = []
-        bar_chart.add(state, population_values)
+        bar_chart.add('guru', population_values)
     return render_template('question1.html', chart=bar_chart.render_data_uri())
 
 @app.route('/question2', )
