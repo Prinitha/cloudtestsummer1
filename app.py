@@ -42,12 +42,13 @@ def hello_world():
 @app.route('/q5', methods=['GET'])
 def q5():
     cursor1 = conn.cursor()
-    cursor2 = conn.cursor()
+
     sql1 = 'select StateName from voting where (TotalPop between 2000 and 8000)'
-    sql2 = 'select StateName from voting where (TotalPop between 8000 and 40000)'
     cursor1.execute(sql1, )
-    cursor2.execute(sql2, )
     rows1 = cursor1.fetchall()
+    cursor2 = conn.cursor()
+    sql2 = 'select StateName from voting where (TotalPop between 8000 and 40000)'
+    cursor2.execute(sql2, )
     rows2 = cursor2.fetchall()
     return render_template("test.html", rows1=rows1, rows2=rows2)
 
