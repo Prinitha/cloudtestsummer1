@@ -92,7 +92,7 @@ def question2():
 @app.route('/question2_execute', methods=['GET'])
 def question2_execute():
     cursor = conn.cursor()
-    sql = "select * from population where State = 'Alabama' or State = 'Florida'"
+    sql = "select TOP 5 latitude,depth from quake6"
     print(sql)
     result = cursor.execute(sql).fetchall()
     xy_chart = pygal.XY(stroke=False, height=300)
@@ -106,7 +106,7 @@ def question2_execute():
             print(r[0])
             population_val = r[i]
             print(r[i])
-            population_val = population_val.replace(",", "")
+            # population_val = population_val.replace(",", "")
             int_val = int(population_val)
             tuple = (db_years[i], int_val)
             scatterplot_data.append(tuple)
