@@ -45,7 +45,7 @@ def question1():
 @app.route('/question1_execute', methods=['GET'])
 def question1_execute():
     bar_chart = pygal.Bar(width=1000, height=500)
-    sql = "select * from quakes6 where place like '%Texas%' or place like '%Alaska%' or place like '%CA%'"
+    sql = "select * from quake6 where place like '%Texas%' or place like '%Alaska%' or place like '%CA%'"
     # print(sql)
     cursor = conn.cursor()
     result = cursor.execute(sql).fetchall()
