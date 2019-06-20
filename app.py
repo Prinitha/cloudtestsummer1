@@ -78,7 +78,7 @@ def question1_execute():
         population_values.append(r[1])
         # state = r[0]
         # population_values = []
-        bar_chart.add(state, population_values)
+        bar_chart.add("Pri", population_values)
     return render_template('question1.html', chart=bar_chart.render_data_uri())
 
 
