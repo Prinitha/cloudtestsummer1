@@ -32,6 +32,8 @@
         </tr>
     {% endfor %}
 
+</table>
+<table>
     <tr>
 
         <th> State between 8 million and 40 million </th>
@@ -43,7 +45,9 @@
             </td>
         </tr>
     {% endfor %}
+
 </table>
+
 
 {% if chart%}
     <embed type="image/svg+xml" src= {{ chart|safe }} />
