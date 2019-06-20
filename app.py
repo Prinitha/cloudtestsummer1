@@ -147,7 +147,7 @@ def question1_execute():
     bar_chart = pygal.Bar(width=1000, height=500)
     # histo_chart = pygal.Histogram()
     # histo_chart = pygal.Bar(width=1000, height=500)
-    sql = "select TOP 5 latitude,depth from quake6"
+    sql = "select TOP 5 place,depth from quake6"
     # print(sql)
     cursor = conn.cursor()
     result = cursor.execute(sql).fetchall()
@@ -161,6 +161,7 @@ def question1_execute():
         # state = r[0]
         # population_values = []
         bar_chart.add(r[0], population_values)
+    bar_chart.render()
     return render_template('question1.html', chart=bar_chart.render_data_uri())
 
 
