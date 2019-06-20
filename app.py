@@ -55,7 +55,8 @@ def question1_execute():
         population_values = []
         for year in range(1, len(r)):
             string_val = r[year]
-            # string_val = string_val.replace(",", "")
+            print(string_val)
+            string_val = string_val.replace(",", "")
             int_val = int(string_val)
             population_values.append(int_val)
         bar_chart.add(state, population_values)
