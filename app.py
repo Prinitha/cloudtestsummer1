@@ -38,7 +38,7 @@ conn = pypyodbc.connect(
 def hello_world():
     return render_template('common.html', )
 
-@app.route('/my_display_range_5')
+@app.route('/my_display_range_5', )
 def my_display_range_5():
     # long_value = request.args['long']
     # depth_range1 = request.args['depth_range1']
