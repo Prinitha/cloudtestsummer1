@@ -64,9 +64,10 @@ def question1():
 #         bar_chart.add(state, population_values)
 #     return render_template('question1.html', chart=bar_chart.render_data_uri())
 
+@app.route('/question1_execute', methods=['GET'])
 def question1_execute():
     bar_chart = pygal.Bar(width=1000, height=500)
-    sql = "select latitude,depth from quake6" 
+    sql = "select latitude,depth from quake6"
     # print(sql)
     cursor = conn.cursor()
     result = cursor.execute(sql).fetchall()
