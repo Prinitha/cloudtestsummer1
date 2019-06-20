@@ -66,7 +66,8 @@ def question1():
 
 @app.route('/question1_execute', methods=['GET'])
 def question1_execute():
-    histo_chart = pygal.Histogram()
+    bar_chart = pygal.Bar(width=1000, height=500)
+    # histo_chart = pygal.Histogram()
     # histo_chart = pygal.Bar(width=1000, height=500)
     sql = "select TOP 5 latitude,depth from quake6"
     # print(sql)
@@ -79,8 +80,8 @@ def question1_execute():
         population_values.append(r[1])
         # state = r[0]
         # population_values = []
-        histo_chart.add("Pri", population_values)
-    return render_template('question1.html', chart=histo_chart.render_data_uri())
+        bar_chart.add("Pri", population_values)
+    return render_template('question1.html', chart=bar_chart.render_data_uri())
 
 
 @app.route('/question2', )
