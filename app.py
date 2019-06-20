@@ -58,9 +58,9 @@ def question1_execute():
         for year in range(1, len(r)):
             string_val = r[year]
             print(string_val)
-            string_val = string_val.replace(",", "")
-            int_val = int(string_val)
-            population_values.append(int_val)
+            # string_val = string_val.replace(",", "")
+            # int_val = int(string_val)
+            population_values.append(string_val)
         bar_chart.add(state, population_values)
     return render_template('question1.html', chart=bar_chart.render_data_uri())
 
