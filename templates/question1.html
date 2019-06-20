@@ -15,14 +15,16 @@
 {#    <input type="submit" name= "form" value="ExecuteCache" />#}
 {#</form>#}
 
+{% if chart%}
+    <embed type="image/svg+xml" src= {{ chart|safe }} />
+<!--    <embed type="image/svg+xml" src="/mysvg.svg" /> -->
+{% endif %}
+
 <form action="/question1_execute" method="get">
     <input type="submit" value="Execute">
 </form>
 
-{% if chart%}
-    <embed type="image/svg+xml" src= {{ chart }} />
-<!--    <embed type="image/svg+xml" src="/mysvg.svg" /> -->
-{% endif %}
+
 
 {#{% if line%}#}
 {#    <embed type="image/svg+xml" src= {{ line|safe }} />#}
