@@ -1,5 +1,3 @@
-
-
 import pypyodbc
 from flask import Flask, render_template, request
 from statistics import mean
