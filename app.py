@@ -153,12 +153,14 @@ def question1_execute():
     result = cursor.execute(sql).fetchall()
     population_values = []
     state = []
+    # i=0
     for r in result:
-        state.append(str(r[0]))
+
+        # state.append(str(r[0]))
         population_values.append(r[1])
         # state = r[0]
         # population_values = []
-        bar_chart.add(str(state), population_values)
+        bar_chart.add(r[0], population_values)
     return render_template('question1.html', chart=bar_chart.render_data_uri())
 
 
