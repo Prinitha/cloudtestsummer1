@@ -41,7 +41,8 @@ def hello_world():
 
 @app.route('/q5', methods=['GET'])
 def q5():
-    cursor = conn.cursor()
+    cursor1 = conn.cursor()
+    cursor2 = conn.cursor()
     sql1 = 'select StateName from voting where (TotalPop between 2000 and 8000)'
     sql2 = 'select StateName from voting where (TotalPop between 8000 and 40000)'
     cursor1.execute(sql1, )
