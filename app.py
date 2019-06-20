@@ -6,7 +6,10 @@ import pygal
 
 app = Flask(__name__)
 # conn = db.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:cloud3dbserver.database.windows.net,1433;Database=cloud3db;Uid=dbuser@cloud3dbserver;Pwd={insert db password here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
-connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
+conn = pypyodbc.connect(
+    "Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
+
+
 # redis_connect_dict = {}
 # redis_connect_dict['host'] = 'cloud3redis.redis.cache.windows.net'
 # redis_connect_dict['port'] = 6380
@@ -31,24 +34,26 @@ connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp
 
 @app.route('/')
 def hello_world():
-    return render_template('common.html',)
+    return render_template('common.html', )
+
 
 @app.route('/question1', )
 def question1():
     return render_template('question1.html')
 
-@app.route('/question1_execute',  methods=['GET'])
+
+@app.route('/question1_execute', methods=['GET'])
 def question1_execute():
     bar_chart = pygal.Bar(width=1000, height=500)
     sql = "select * from population where State = 'Alabama' or State = 'Alaska' or State = 'California' or State = 'Florida'"
     print(sql)
     cursor = conn.cursor()
     result = cursor.execute(sql).fetchall()
-    #population_values = []
+    # population_values = []
     for r in result:
         state = r[0]
         population_values = []
-        for year in range(1,len(r)):
+        for year in range(1, len(r)):
             string_val = r[year]
             string_val = string_val.replace(",", "")
             int_val = int(string_val)
@@ -61,7 +66,8 @@ def question1_execute():
 def question2():
     return render_template('question2.html')
 
-@app.route('/question2_execute',  methods=['GET'])
+
+@app.route('/question2_execute', methods=['GET'])
 def question2_execute():
     cursor = conn.cursor()
     sql = "select * from population where State = 'Alabama' or State = 'Florida'"
@@ -85,14 +91,15 @@ def question2_execute():
         xy_chart.add(state, scatterplot_data)
     xy_chart.render()
     return render_template('question2.html', chart=xy_chart.render_data_uri())
-    #return render_template('question2.html', result=result, chart=bar_chart.render_data_uri(), line =line.render_data_uri() )
+    # return render_template('question2.html', result=result, chart=bar_chart.render_data_uri(), line =line.render_data_uri() )
+
 
 @app.route('/question3', )
 def question3():
     return render_template('question3.html')
 
 
-@app.route('/question3_execute',  methods=['GET'])
+@app.route('/question3_execute', methods=['GET'])
 def question3_execute():
     pie_chart = pygal.Pie(height=300)
     pie_chart.title = 'Browser usage in February 2012 (in %)'
@@ -108,13 +115,15 @@ def question3_execute():
 @app.route('/question4', )
 def question4():
     return render_template('question4.html')
-@app.route('/question4_execute',  methods=['GET'])
+
+
+@app.route('/question4_execute', methods=['GET'])
 def question4_execute():
     cursor = conn.cursor()
     line_chart = pygal.Line()
     line_chart.title = 'BL (in %)'
     line_chart.x_labels = map(str, range(1970, 2015, 5))
-    codes = ["IND","AFG"]
+    codes = ["IND", "AFG"]
     for code in codes:
         sql = "select entity, BLPercent from educationshare where Code = " + "'" + code + "'"
         print(sql)
@@ -133,18 +142,19 @@ def question4_execute():
 def question7():
     return render_template('question7.html')
 
-@app.route('/question7_execute',  methods=['GET'])
+
+@app.route('/question7_execute', methods=['GET'])
 def question7_execute():
     bar_chart = pygal.Bar(width=1000, height=500)
     year = str(request.args.get('year'))
-    year = 'y_'+year
+    year = 'y_' + year
     lrange1 = request.args.get('lrange1')
     hrange1 = request.args.get('hrange1')
     lrange2 = request.args.get('lrange2')
     hrange2 = request.args.get('hrange2')
     lrange3 = request.args.get('lrange3')
     hrange3 = request.args.get('hrange3')
-    range = [lrange1 +'-' + hrange1, lrange2 +'-' + hrange2, lrange3 +'-' + hrange3]
+    range = [lrange1 + '-' + hrange1, lrange2 + '-' + hrange2, lrange3 + '-' + hrange3]
     print(range)
     cursor = conn.cursor()
     sql = "select count(State) from population where " + year + " between " + "'" + lrange1 + "'" + " and " + "'" + hrange1 + "'"
@@ -168,7 +178,9 @@ def question7_execute():
 @app.route('/question9', )
 def question9():
     return render_template('question9.html')
-@app.route('/question9_execute',  methods=['GET'])
+
+
+@app.route('/question9_execute', methods=['GET'])
 def question9_execute():
     code = request.args.get('code')
     lyear = int(request.args.get('lyear'))
@@ -178,12 +190,12 @@ def question9_execute():
     xy_chart = pygal.XY(stroke=False)
     xy_chart.title = 'BL (in %)'
     years = []
-    for i in range(lyear, hyear+interval, interval):
+    for i in range(lyear, hyear + interval, interval):
         years.append(i)
     print(years)
-    #xy_chart.x_labels = map(str, range(lyear, hyear+interval, interval))
-    #codes = ["IND","AFG"]
-    #for code in codes:
+    # xy_chart.x_labels = map(str, range(lyear, hyear+interval, interval))
+    # codes = ["IND","AFG"]
+    # for code in codes:
     sql = "select entity, BLPercent from educationshare where Code = " + "'" + code + "'"
     print(sql)
     result = cursor.execute(sql).fetchall()
@@ -195,7 +207,7 @@ def question9_execute():
         bl_values.append(result[i][1])
     print('bl')
     print(bl_values)
-    abc = list(zip(years,bl_values))
+    abc = list(zip(years, bl_values))
     xy_chart.add(country, abc)
     return render_template('question9.html', chart=xy_chart.render_data_uri())
 
@@ -204,25 +216,29 @@ def question9_execute():
 def question10():
     return render_template('question10.html')
 
-@app.route('/question10_execute',  methods=['GET'])
+
+@app.route('/question10_execute', methods=['GET'])
 def question10_execute():
     range = int(request.args.get('range'))
     range = range * 1000000
     bar_chart = pygal.Bar(width=1000, height=500)
     year = str(request.args.get('year'))
-    year = 'y_'+year
+    year = 'y_' + year
     lrange1 = 0
     hrange1 = lrange1 + range
     lrange2 = hrange1
     hrange2 = hrange1 + range
     lrange3 = hrange2
     hrange3 = hrange2 + range
-    range = [str(lrange1) +'-' + str(hrange1), str(lrange2) +'-' + str(hrange2), str(lrange3) +'-' + str(hrange3)]
+    range = [str(lrange1) + '-' + str(hrange1), str(lrange2) + '-' + str(hrange2), str(lrange3) + '-' + str(hrange3)]
     print(range)
     cursor = conn.cursor()
-    sql = "select count(State) from population where " + year + " between " + "'" + str(lrange1) + "'" + " and " + "'" + str(hrange1) + "'"
-    sql1 = "select count(State) from population where " + year + " between " + "'" + str(lrange2) + "'" + " and " + "'" + str(hrange2) + "'"
-    sql2 = "select count(State) from population where " + year + " between " + "'" + str(lrange3) + "'" + " and " + "'" + str(hrange3) + "'"
+    sql = "select count(State) from population where " + year + " between " + "'" + str(
+        lrange1) + "'" + " and " + "'" + str(hrange1) + "'"
+    sql1 = "select count(State) from population where " + year + " between " + "'" + str(
+        lrange2) + "'" + " and " + "'" + str(hrange2) + "'"
+    sql2 = "select count(State) from population where " + year + " between " + "'" + str(
+        lrange3) + "'" + " and " + "'" + str(hrange3) + "'"
     print(sql)
     result = cursor.execute(sql).fetchall()
     print(result)
@@ -240,13 +256,6 @@ def question10_execute():
 
 if __name__ == '_main_':
     app.run()
-
-
-
-
-
-
-
 
 #
 #
