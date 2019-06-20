@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<h1>
+    1001668557 <br/>
+    NAGARAJAN, PRINITHA<br/>
+    The results are:<br/><br/>
+</h1>
+<table>
+    <tr>
+
+        <th> Mean </th>
+        <th> Count </th>
+    </tr>
+    {% for row in rows %}
+        <tr>
+            <td>
+              {{ row[0] }}
+            </td>
+            <td>
+               {{ row[1] }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="false"></span></button>
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+</body>
+</html>

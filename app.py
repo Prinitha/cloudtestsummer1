@@ -38,6 +38,27 @@ conn = pypyodbc.connect(
 def hello_world():
     return render_template('common.html', )
 
+@app.route('/my_display_range_5')
+def display_range():
+    # long_value = request.args['long']
+    # depth_range1 = request.args['depth_range1']
+    # depth_range2 = request.args['depth_range2']
+    # start_time = time()
+    cursor = conn.cursor()
+    # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+    # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+    sql = 'select avg(TotalPop), count(VotePop) from StateVoting'
+    # print(sql)
+    cursor.execute(sql, )
+    rows = cursor.fetchall()
+    # print(rows)
+    # cache.set(magnitude, str(rows))
+    # flash('In DB Query' + str())
+    # end_time = time()
+    # time_taken = (end_time - start_time)
+    # flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
+    return render_template("testpage.html", rows=rows)
+    # return redirect(url_for('hello_world'))
 
 @app.route('/question1', )
 def question1():
@@ -93,7 +114,7 @@ def question2():
 def question2_execute():
     cursor = conn.cursor()
     sql = "select TOP 5 latitude,depth from quake6"
-    print(sql)
+    # print(sql)
     result = cursor.execute(sql).fetchall()
     xy_chart = pygal.XY(stroke=False, height=300)
     xy_chart.title = 'Correlation'
