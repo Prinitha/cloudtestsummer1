@@ -57,7 +57,7 @@ def display_range():
     # end_time = time()
     # time_taken = (end_time - start_time)
     # flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
-    return render_template("testpage.html", rows=rows)
+    return render_template("test.html", rows=rows)
     # return redirect(url_for('hello_world'))
 
 @app.route('/question1', )
