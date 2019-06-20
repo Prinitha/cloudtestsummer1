@@ -44,26 +44,41 @@ def question1():
     return render_template('question1.html')
 
 
-@app.route('/question1_execute', methods=['GET'])
+# @app.route('/question1_execute', methods=['GET'])
+# def question1_execute():
+#     bar_chart = pygal.Bar(width=1000, height=500)
+#     sql = "select * from quake6 where place like '%Texas%' or place like '%Alaska%' or place like '%CA%'"
+#     # print(sql)
+#     cursor = conn.cursor()
+#     result = cursor.execute(sql).fetchall()
+#     # population_values = []
+#     for r in result:
+#         state = r[0]
+#         population_values = []
+#         for year in range(1, len(r)):
+#             string_val = r[year]
+#             print(string_val)
+#             # string_val = string_val.replace(",", "")
+#             # int_val = int(string_val)
+#             population_values.append(string_val)
+#         bar_chart.add(state, population_values)
+#     return render_template('question1.html', chart=bar_chart.render_data_uri())
+
 def question1_execute():
     bar_chart = pygal.Bar(width=1000, height=500)
-    sql = "select * from quake6 where place like '%Texas%' or place like '%Alaska%' or place like '%CA%'"
+    sql = "select latitude,depth from quake6"
     # print(sql)
     cursor = conn.cursor()
     result = cursor.execute(sql).fetchall()
-    # population_values = []
+    population_values = []
+    state=[]
     for r in result:
-        state = r[0]
-        population_values = []
-        for year in range(1, len(r)):
-            string_val = r[year]
-            print(string_val)
-            # string_val = string_val.replace(",", "")
-            # int_val = int(string_val)
-            population_values.append(string_val)
+        state.append(r[0])
+        population_values.append(r[1])
+        # state = r[0]
+        # population_values = []
         bar_chart.add(state, population_values)
     return render_template('question1.html', chart=bar_chart.render_data_uri())
-
 
 @app.route('/question2', )
 def question2():
