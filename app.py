@@ -1,5 +1,6 @@
 import pypyodbc
 from flask import Flask, render_template, request
+from statistics import mean
 import pypyodbc as db
 # import redis
 import pygal
@@ -47,17 +48,32 @@ def my_display_range_5():
     cursor = conn.cursor()
     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
-    sql = 'select avg(TotalPop), count(VotePop) from StateVoting'
+    # for r in result:
+    # state = r[0]
+    #         population_values = []
+    #         for year in range(1, len(r)):
+    #             string_val = r[year]
+    #             print(string_val)
+    #             # string_val = string_val.replace(",", "")
+    #             # int_val = int(string_val)
+    #             population_values.append(string_val)
+    #         bar_chart.add(state, population_values)
+    # sql = 'select TotalPop'
+    sql1 = 'select TotalPop from StateVoting group by StateName'
+    # sql2 = 'select count(VotePop) from StateVoting group by StateName'
     # print(sql)
-    cursor.execute(sql, )
+    cursor.execute(sql1, )
     rows = cursor.fetchall()
+    rows = int(rows)
+    mean_rows = mean(rows)
+
     # print(rows)
     # cache.set(magnitude, str(rows))
     # flash('In DB Query' + str())
     # end_time = time()
     # time_taken = (end_time - start_time)
     # flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
-    return render_template("test.html", rows=rows)
+    return render_template("test.html", mean_rows=mean_rows)
     # return redirect(url_for('hello_world'))
 
 @app.route('/question1', )
