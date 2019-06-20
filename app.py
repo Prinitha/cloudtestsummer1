@@ -40,7 +40,7 @@ def hello_world():
     return render_template('common.html', )
 
 @app.route('/q5', methods=['GET'])
-def my_display_range_5():
+def q5():
     cursor = conn.cursor()
     sql = 'select StateName from voting where (TotalPop between 2000 and 8000) or (TotalPop between 8000 and 40000)'
     cursor.execute(sql, )
