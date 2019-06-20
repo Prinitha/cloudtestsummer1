@@ -69,7 +69,7 @@ def question1_execute():
     bar_chart = pygal.Bar(width=1000, height=500)
     # histo_chart = pygal.Histogram()
     # histo_chart = pygal.Bar(width=1000, height=500)
-    sql = "select TOP 5 latitude,depth from quake6 group by latitude, depth"
+    sql = "select TOP 5 latitude,depth from quake6 group by latitude, depth" 
     # print(sql)
     cursor = conn.cursor()
     result = cursor.execute(sql).fetchall()
