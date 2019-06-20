@@ -81,6 +81,7 @@ def my_display_range_5():
 @app.route('/my_display_range_6', methods=['GET'])
 def my_display_range_6():
     cursor = conn.cursor()
+
     sql = "select" \
 " case " \
 		   " when PercentVote >=40 and PercentVote <=45 then \'40-45\'" \
@@ -106,7 +107,13 @@ def my_display_range_6():
 
     cursor.execute(sql, )
     rows = cursor.fetchall()
-    return render_template("test.html", rows=rows)
+    pie_chart = pygal.Pie(height=300)
+    pie_chart.title = 'PercentVote'
+    for row in rows:
+        pie_chart.add(row[0], row[1])
+    pie_chart.render()
+    # return render_template('question3.html', chart=pie_chart.render_data_uri())
+    return render_template("test.html", chart=pie_chart.render_data_uri())
 
 
 
