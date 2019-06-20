@@ -72,14 +72,15 @@ def question1_execute():
     cursor = conn.cursor()
     result = cursor.execute(sql).fetchall()
     population_values = []
-    state=[]
+    state = []
     for r in result:
-        state.append(r[0])
+        state.append(str(r[0]))
         population_values.append(r[1])
         # state = r[0]
         # population_values = []
-        bar_chart.add('guru', population_values)
+        bar_chart.add(state, population_values)
     return render_template('question1.html', chart=bar_chart.render_data_uri())
+
 
 @app.route('/question2', )
 def question2():
