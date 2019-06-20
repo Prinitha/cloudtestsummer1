@@ -39,6 +39,18 @@ conn = pypyodbc.connect(
 def hello_world():
     return render_template('common.html', )
 
+@app.route('/q5', methods=['GET'])
+def my_display_range_5():
+    cursor = conn.cursor()
+    sql = 'select StateName from voting where (TotalPop between 2000 and 8000) or (TotalPop between 8000 and 40000)'
+    cursor.execute(sql, )
+    rows = cursor.fetchall()
+
+    return render_template("test.html", rows=rows)
+
+
+
+
 @app.route('/my_display_range_5', methods=['GET'])
 def my_display_range_5():
     # long_value = request.args['long']
@@ -312,6 +324,8 @@ def question9_execute():
     print(bl_values)
     abc = list(zip(years, bl_values))
     xy_chart.add(country, abc)
+    xy_chart.add(country, abc)
+
     return render_template('question9.html', chart=xy_chart.render_data_uri())
 
 

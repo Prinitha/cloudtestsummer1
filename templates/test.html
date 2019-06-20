@@ -16,26 +16,22 @@
 <h1>
     1001668557 <br/>
     NAGARAJAN, PRINITHA<br/>
-    The results are: <br/><br/>
+    The states are: <br/><br/>
     <br>
 </h1>
-{#<table>#}
-{#    <tr>#}
-{##}
-{#        <th> Mean </th>#}
-{#        <th> Count </th>#}
-{#    </tr>#}
-{#    {% for row in rows %}#}
-{#        <tr>#}
-{#            <td>#}
-{#              {{ row[0] }}#}
-{#            </td>#}
-{#            <td>#}
-{#               {{ row[1] }}#}
-{#            </td>#}
-{#        </tr>#}
-{#    {% endfor %}#}
-{#</table>#}
+<table>
+    <tr>
+
+        <th> State </th>
+    </tr>
+    {% for row in rows %}
+        <tr>
+            <td>
+              {{ row[0] }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 
 {% if chart%}
     <embed type="image/svg+xml" src= {{ chart|safe }} />
