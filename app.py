@@ -39,7 +39,7 @@ def hello_world():
     return render_template('common.html', )
 
 @app.route('/my_display_range_5')
-def display_range():
+def my_display_range_5():
     # long_value = request.args['long']
     # depth_range1 = request.args['depth_range1']
     # depth_range2 = request.args['depth_range2']
