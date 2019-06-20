@@ -7,7 +7,9 @@ import pygal
 app = Flask(__name__)
 # conn = db.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:cloud3dbserver.database.windows.net,1433;Database=cloud3db;Uid=dbuser@cloud3dbserver;Pwd={insert db password here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 conn = pypyodbc.connect(
-    "Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
+    "Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,"
+    "1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,"
+    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 
 
 # redis_connect_dict = {}
