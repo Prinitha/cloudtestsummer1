@@ -1,3 +1,5 @@
+
+
 import pypyodbc
 from flask import Flask, render_template, request
 from statistics import mean
@@ -58,14 +60,15 @@ def my_display_range_5():
     #             # int_val = int(string_val)
     #             population_values.append(string_val)
     #         bar_chart.add(state, population_values)
-    # sql = 'select TotalPop'
-    sql1 = 'select TotalPop from StateVoting group by StateName'
+
+    sql = 'select AVG(TotalPop), SUM(Voted) from StateVoting'
+    # sql1 = 'select TotalPop from StateVoting group by StateName'
     # sql2 = 'select count(VotePop) from StateVoting group by StateName'
     # print(sql)
-    cursor.execute(sql1, )
+    cursor.execute(sql, )
     rows = cursor.fetchall()
-    rows = int(rows)
-    mean_rows = mean(rows)
+    # rows = int(rows)
+    # mean_rows = mean(rows)
 
     # print(rows)
     # cache.set(magnitude, str(rows))
@@ -73,7 +76,7 @@ def my_display_range_5():
     # end_time = time()
     # time_taken = (end_time - start_time)
     # flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
-    return render_template("test.html", mean_rows=mean_rows)
+    return render_template("test.html", rows=rows)
     # return redirect(url_for('hello_world'))
 
 @app.route('/question1', )
@@ -315,92 +318,44 @@ def question10_execute():
 
 if __name__ == '_main_':
     app.run()
-
 #
-#
-# from flask import Flask, render_template, flash, request, redirect, url_for
-# import random
-# import pypyodbc
-# import redis
-# import ast
-# from time import time
-# app = Flask(__name__)
-# connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
-# cursor = connection.cursor()
-# app.secret_key = "Secret!!!!"
-# host_name = 'cloudredis.redis.cache.windows.net'
-# password = 'Nbez9mJY7hUbFWLFAgWp7OJXyku9XIXep7waffZg4z8='
-# cache = redis.StrictRedis(host=host_name, port=6380, password=password, ssl=True)
-#
-#
-# @app.route('/')
-# def hello_world():
-#     cursor.execute("select count(*) from quake6")
-#     rows = cursor.fetchall()
-#     count = rows[0][0]
-#     return render_template('index.html', count=count)
-#
-# @app.route('/my_display_range_5')
-# def display_range():
-#     long_value = request.args['long']
-#     depth_range1 = request.args['depth_range1']
-#     depth_range2 = request.args['depth_range2']
-#     start_time = time()
-#     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
-#     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
-#     sql = 'select latitude, longitude, [time], depthError from quake6 where ((longitude > ?) and (depthError between ? and ?)) '
-#     # print(sql)
-#     cursor.execute(sql, (long_value, depth_range1, depth_range2))
-#     rows = cursor.fetchall()
-#     # print(rows)
-#     # cache.set(magnitude, str(rows))
-#     # flash('In DB Query' + str())
-#     end_time = time()
-#     time_taken = (end_time - start_time)
-#     flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
-#     return render_template("testpage.html", rows=rows)
-#     # return redirect(url_for('hello_world'))
-#
-#
-# @app.route('/my_query_specific')
-# def my_query_specific():
-#     no_of_queries = request.args['no_of_queries']
-#     depth_range1 = request.args['depth_range1']
-#     depth_range2 = request.args['depth_range2']
-#     # start_time = time()
-#     # j=0
-#     # magnitude = random.uniform(float(lower_limit), float(higher_limit))
-#     for i in range(0, int(no_of_queries)):
-#
-#         # magnitude = random.uniform(float(depth_range1), float(depth_range2))
-#         # if not cache.get(magnitude):
-#         start_time = time()
-#         sql = 'select TOP 2 depthError from quake6 where (depthError between ? and ?) order by NEWID()'
-#         cursor.execute(sql, (depth_range1, depth_range2))
-#         rows = cursor.fetchall()
-#         # cache.set(magnitude, str(rows))
-#         # flash('In DB Query '+str(rows[0][0]))
-#         # else:
-#         #     rows_string = cache.get(magnitude)
-#         #     # rows = ast.literal_eval(rows_string)
-#         #     flash('In Cache ' + str(magnitude))
-#         end_time = time()
-#         time_taken = (end_time - start_time) / int(no_of_queries)
-#         print("**********", rows)
-#         flash('Depth Error 1: ' + str(rows[0][0]) + ' Depth Error 2: ' + str(rows[1][0]) + '.\n The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
-#     return redirect(url_for('hello_world'))
-#
-# # @app.route('/display_range')
-# # def display_range():
-# #     no_queries = request.args['no_queries']
-# #     low_range = request.args['low_range']
-# #     high_range = request.args['high_range']
-# #     start_time = time()
-# #     sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
-# #     print(sql)
-# #     cursor.execute(sql, (low_range, high_range))
+# #
+# #
+# # from flask import Flask, render_template, flash, request, redirect, url_for
+# # import random
+# # import pypyodbc
+# # import redis
+# # import ast
+# # from time import time
+# # app = Flask(__name__)
+# # connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
+# # cursor = connection.cursor()
+# # app.secret_key = "Secret!!!!"
+# # host_name = 'cloudredis.redis.cache.windows.net'
+# # password = 'Nbez9mJY7hUbFWLFAgWp7OJXyku9XIXep7waffZg4z8='
+# # cache = redis.StrictRedis(host=host_name, port=6380, password=password, ssl=True)
+# #
+# #
+# # @app.route('/')
+# # def hello_world():
+# #     cursor.execute("select count(*) from quake6")
 # #     rows = cursor.fetchall()
-# #     print(rows)
+# #     count = rows[0][0]
+# #     return render_template('index.html', count=count)
+# #
+# # @app.route('/my_display_range_5')
+# # def display_range():
+# #     long_value = request.args['long']
+# #     depth_range1 = request.args['depth_range1']
+# #     depth_range2 = request.args['depth_range2']
+# #     start_time = time()
+# #     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+# #     # sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+# #     sql = 'select latitude, longitude, [time], depthError from quake6 where ((longitude > ?) and (depthError between ? and ?)) '
+# #     # print(sql)
+# #     cursor.execute(sql, (long_value, depth_range1, depth_range2))
+# #     rows = cursor.fetchall()
+# #     # print(rows)
 # #     # cache.set(magnitude, str(rows))
 # #     # flash('In DB Query' + str())
 # #     end_time = time()
@@ -408,44 +363,278 @@ if __name__ == '_main_':
 # #     flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
 # #     return render_template("testpage.html", rows=rows)
 # #     # return redirect(url_for('hello_world'))
+# #
+# #
+# # @app.route('/my_query_specific')
+# # def my_query_specific():
+# #     no_of_queries = request.args['no_of_queries']
+# #     depth_range1 = request.args['depth_range1']
+# #     depth_range2 = request.args['depth_range2']
+# #     # start_time = time()
+# #     # j=0
+# #     # magnitude = random.uniform(float(lower_limit), float(higher_limit))
+# #     for i in range(0, int(no_of_queries)):
+# #
+# #         # magnitude = random.uniform(float(depth_range1), float(depth_range2))
+# #         # if not cache.get(magnitude):
+# #         start_time = time()
+# #         sql = 'select TOP 2 depthError from quake6 where (depthError between ? and ?) order by NEWID()'
+# #         cursor.execute(sql, (depth_range1, depth_range2))
+# #         rows = cursor.fetchall()
+# #         # cache.set(magnitude, str(rows))
+# #         # flash('In DB Query '+str(rows[0][0]))
+# #         # else:
+# #         #     rows_string = cache.get(magnitude)
+# #         #     # rows = ast.literal_eval(rows_string)
+# #         #     flash('In Cache ' + str(magnitude))
+# #         end_time = time()
+# #         time_taken = (end_time - start_time) / int(no_of_queries)
+# #         print("**********", rows)
+# #         flash('Depth Error 1: ' + str(rows[0][0]) + ' Depth Error 2: ' + str(rows[1][0]) + '.\n The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
+# #     return redirect(url_for('hello_world'))
+# #
+# # # @app.route('/display_range')
+# # # def display_range():
+# # #     no_queries = request.args['no_queries']
+# # #     low_range = request.args['low_range']
+# # #     high_range = request.args['high_range']
+# # #     start_time = time()
+# # #     sql = 'select TOP ' + no_queries + ' mag, latitude, longitude from quake6 where mag between ? and ?'
+# # #     print(sql)
+# # #     cursor.execute(sql, (low_range, high_range))
+# # #     rows = cursor.fetchall()
+# # #     print(rows)
+# # #     # cache.set(magnitude, str(rows))
+# # #     # flash('In DB Query' + str())
+# # #     end_time = time()
+# # #     time_taken = (end_time - start_time)
+# # #     flash('Time taken is : ' + "%.4f" % time_taken + " seconds")
+# # #     return render_template("testpage.html", rows=rows)
+# # #     # return redirect(url_for('hello_world'))
+# #
+# # @app.route('/random_queries')
+# # def random_queries():
+# #     query_limit = request.args['nqueries']
+# #     start_time = time()
+# #     for i in range(0, int(query_limit)):
+# #         cursor.execute('select TOP 1 * from quake6 order by rand()')
+# #     end_time = time()
+# #     time_taken = (end_time - start_time) / int(query_limit)
+# #     flash('The Average Time taken to execute the random queries is : ' + "%.4f" % time_taken + " seconds")
+# #     return redirect(url_for('hello_world'))
+# #
+# #
+# # @app.route('/query_specific')
+# # def query_specific():
+# #     query_limit = request.args['nqueries']
+# #     lower_limit = request.args['low']
+# #     higher_limit = request.args['high']
+# #     start_time = time()
+# #     # magnitude = random.uniform(float(lower_limit), float(higher_limit))
+# #     for i in range(0, int(query_limit)):
+# #         magnitude = random.uniform(float(lower_limit), float(higher_limit))
+# #         if not cache.get(magnitude):
+# #             sql = 'select * from quake6 where depthError > ? '
+# #             cursor.execute(sql, (magnitude,))
+# #             rows = cursor.fetchall()
+# #             cache.set(magnitude, str(rows))
+# #             flash('In DB Query '+str(magnitude))
+# #         else:
+# #             rows_string = cache.get(magnitude)
+# #             # rows = ast.literal_eval(rows_string)
+# #             flash('In Cache ' + str(magnitude))
+# #     end_time = time()
+# #     time_taken = (end_time - start_time) / int(query_limit)
+# #     flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
+# #     # return redirect(url_for('hello_world'))
+# #     return render_template('results.html')
+# #
+# #
+# # if __name__ == '__main__':
+# #     app.run()
+
+
+
+# changes = 0
+# # required imports
+# from flask import *
+# import pandas as pd
+# import os
+# from os import path, walk
+# import json
+# import sqlite3 as sql
+# import redis
+# import time
+# import pickle
+# import random
 #
-# @app.route('/random_queries')
-# def random_queries():
-#     query_limit = request.args['nqueries']
-#     start_time = time()
-#     for i in range(0, int(query_limit)):
-#         cursor.execute('select TOP 1 * from quake6 order by rand()')
-#     end_time = time()
-#     time_taken = (end_time - start_time) / int(query_limit)
-#     flash('The Average Time taken to execute the random queries is : ' + "%.4f" % time_taken + " seconds")
-#     return redirect(url_for('hello_world'))
+# # port for server access
+# port = 80
+# host = '0.0.0.0'
+# isRemote = False
+# debug = True
+#
+# radis_hostname = ""
+# radis_password = ""
+# radis_port = 6379
+# radis_ssl = False
+#
+# project_root = os.path.dirname(__file__)
+# template_path = os.path.join(project_root, './templates')
+# app = Flask(__name__, template_folder=template_path)
+#
+# # get service information if on IBM Cloud Platform
+# env_json_db = ''
+# # if 'WEBSITE_INSTANCE_ID' in os.environ:
+# #     isRemote = True
+# #     debug = False
+# #     radis_hostname = "adbapplication.redis.cache.windows.net"
+# #     radis_password = "03QdGeHqNJbvldXvRMilQuWj6Mki+cYHMJ9UBVEVyn1c="
+# #     radis_port = "6380"
+# #     radis_ssl = True
+# # else:
+# #     port = 80
+# #     host = '127.65.43.21'
+# #     radis_hostname = "localhost"
+# #     radis_password = ""
+# #     radis_port = 6379
+# #     radis_ssl = False
+#
+# r = redis.StrictRedis(host=radis_hostname, port=radis_port, db=0, password=radis_password, ssl=radis_ssl)
 #
 #
-# @app.route('/query_specific')
-# def query_specific():
-#     query_limit = request.args['nqueries']
-#     lower_limit = request.args['low']
-#     higher_limit = request.args['high']
-#     start_time = time()
-#     # magnitude = random.uniform(float(lower_limit), float(higher_limit))
-#     for i in range(0, int(query_limit)):
-#         magnitude = random.uniform(float(lower_limit), float(higher_limit))
-#         if not cache.get(magnitude):
-#             sql = 'select * from quake6 where depthError > ? '
-#             cursor.execute(sql, (magnitude,))
-#             rows = cursor.fetchall()
-#             cache.set(magnitude, str(rows))
-#             flash('In DB Query '+str(magnitude))
+# @app.route('/')
+# def home():
+#     return render_template('home.html')
+#
+#
+# @app.route('/enternew')
+# def upload_csv():
+#     return render_template('upload.html')
+#
+#
+# @app.route('/addrec', methods=['POST', 'GET'])
+# def addrec():
+#     if request.method == 'POST':
+#         con = sql.connect("database.db")
+#         csv = request.files['myfile']
+#         file = pd.read_csv(csv)
+#         file.to_sql('Earthquake', con, schema=None, if_exists='replace', index=True, index_label=None, chunksize=None,
+#                     dtype=None)
+#         con.close()
+#         return render_template("result.html", msg="Record inserted successfully")
+#
+#
+# @app.route('/list')
+# def list():
+#     cache = "mycache"
+#     start_t = time.time()
+#     query = "select * from Earthquake"
+#     if r.exists(cache):
+#         t = "with Cache"
+#         rows = pickle.loads(r.get(cache))
+#         end_t = time.time() - start_t
+#         r.delete(cache)
+#     else:
+#         t = "without Cache"
+#         con = sql.connect("database.db")
+#         cur = con.cursor()
+#         cur.execute(query)
+#         rows = cur.fetchall()
+#         con.close()
+#         r.set(cache, pickle.dumps(rows))
+#         end_t = time.time() - start_t
+#
+#     return render_template("list.html", rows=rows, e=end_t, t=t)
+#
+#
+# @app.route('/mag_list', methods=['GET', 'POST'])
+# def mag_list():
+#     res = []
+#     cache = "mycache"
+#     start_t = time.time()
+#     for i in range(10):
+#         ran_num = round(random.uniform(-2, 8), 2)
+#         if r.exists(cache + str(i)):
+#             t = "with"
+#             rows = pickle.loads(r.get(cache + str(i)))
+#             print(len(rows))
+#             if rows != None and len(rows) > 0:
+#                 res.append(rows)
 #         else:
-#             rows_string = cache.get(magnitude)
-#             # rows = ast.literal_eval(rows_string)
-#             flash('In Cache ' + str(magnitude))
-#     end_time = time()
-#     time_taken = (end_time - start_time) / int(query_limit)
-#     flash('The Average Time taken to execute the specific queries is : ' + "%.4f" % time_taken + " seconds")
-#     # return redirect(url_for('hello_world'))
-#     return render_template('results.html')
+#             query = "Select place,mag,magType from Earthquake where mag=" + str(ran_num)
+#             t = "without"
+#             con = sql.connect("database.db")
+#             cur = con.cursor()
+#             cur.execute(query)
+#             rows = cur.fetchall()
+#             print(len(rows))
+#             if rows != None and len(rows) > 0:
+#                 res.append(rows)
+#             else:
+#                 temp = "No rows where mag = " + str(ran_num)
+#                 rows.append(temp)
+#                 res.append(rows)
+#             r.set(cache + str(i), pickle.dumps(rows))
+#             con.close()
+#
+#     end_t = time.time() - start_t
+#     # print (res)
+#     return render_template("mag_greater.html", data=res, e=end_t, t=t)
 #
 #
-# if __name__ == '__main__':
+# @app.route('/quakeRange', methods=['POST'])
+# def getPointRange():
+#     data_r1 = int(request.form['data_m1'])
+#     data_r2 = int(request.form['data_m2'])
+#     inc = int(request.form['data_inc'])
+#     next = data_r1
+#     groups = int((data_r2 - data_r1) / inc)
+#     data = []
+#     for i in range(groups):
+#         print(str(next) + ':' + str(next + inc))
+#         g1 = next
+#         g2 = next + inc
+#         query = "SELECT count(*) FROM Earthquake where mag BETWEEN '" + str(g1) + "' AND '" + str(g2) + "' limit 1"
+#         con = sql.connect("database.db")
+#         cur = con.cursor()
+#         cur.execute(query)
+#         mag = cur.fetchall()
+#
+#         next = (next + inc)
+#         data.append([str("Range " + str(g1) + ":" + str(g2)), (mag[0][0])])
+#     out = {'out': data}
+#
+#     return render_template('visual.html', page_data=out)
+#
+#
+# def getFileList():
+#     extra_dirs = ['templates']
+#     extra_files = extra_dirs[:]
+#     for extra_dir in extra_dirs:
+#         for dirname, dirs, files in walk(extra_dir):
+#             for filename in files:
+#                 filename = path.join(dirname, filename)
+#                 if path.isfile(filename):
+#                     extra_files.append(filename)
+#     return extra_files
+#
+#
+# if __name__ == "__main__":
+#     extra_files = []
+#     if debug:
+#         extra_files = getFileList()
+#     # app.run(extra_files=extra_files, host='0.0.0.0', port='80', debug=True)
 #     app.run()
+#
+#
+
+
+
+
+
+
+
+
+
+

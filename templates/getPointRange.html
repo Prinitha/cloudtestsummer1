@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+	<h1>QUIZ 02</h1>
+	<h1>1001646572<br>Sorathia, Abdullah</h1>
+	
+	{% if page_info %}
+		{{page_info}}
+	{% endif %}
+	
+	{% if  page_data %}
+		{% for key in page_data %}			
+			{{key.out|safe}}<br>		   
+		{% endfor %}		
+	{% else %}
+		<h3>no data or matching available</h3>
+	{% endif %}
+	</body>
+</html>

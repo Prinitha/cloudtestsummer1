@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+		<h1>1001646572<br>Sorathia, Abdullah</h1>
+		<h1>Display Table</h1>
+		{% if page_data %}
+			{% for row in page_data %}
+				{% for key,val in row.items() %}
+					{% if row[key] == None %}
+						{{key}}:<b style="color:red;">Data not available</b><br>
+					{% else %}
+						{% if key == "pictures" %}
+							{{key}}:<img style="width: 100px;height: auto;" src={{cloud_info['url']}}\{{cloud_info['bucket']}}\{{val}}><br>
+						{% else %}
+							{% if key == "Salary" %}
+								{{key}}:<b style="color:rgb(4, 0, 255);">{{val}}</b><br>
+							{% else %}							
+								{{key}}:{{val}}<br>
+							{% endif %}
+						{% endif %}
+						
+					{% endif %}
+				{% endfor %}
+				<br><hr>
+			{% endfor %}
+		{% else %}
+			<h3>No data available</h3>
+		{% endif %}
+		</body>
+</html>

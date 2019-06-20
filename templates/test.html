@@ -12,25 +12,25 @@
 <h1>
     1001668557 <br/>
     NAGARAJAN, PRINITHA<br/>
-    The results are: {{ mean_rows }}<br/><br/>
+    The results are: <br/><br/>
 </h1>
-<!--<table>
+<table>
     <tr>
 
         <th> Mean </th>
         <th> Count </th>
     </tr>
-{#    {% for row in rows %}#}
+    {% for row in rows %}
         <tr>
             <td>
-{#              {{ row[0] }}#}
+              {{ row[0] }}
             </td>
             <td>
-{#               {{ row[1] }}#}
+               {{ row[1] }}
             </td>
         </tr>
-{#    {% endfor %}#}
-</table>-->
+    {% endfor %}
+</table>
 {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}

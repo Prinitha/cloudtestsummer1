@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<center>
+    <h1>
+        1001668557 <br/>
+        NAGARAJAN, PRINITHA<br/>
+        There are totally {{ count }} number of earthquakes in my database.
+    </h1>
+
+<br/><br/>
+<form name="my_display_range_5" action = "/my_display_range_5" method = "get" enctype = "multipart/form-data">
+        Enter the longitude value: <input type="text" name="long"> Depth Range 1: <input type="text" name="depth_range1"> Depth Range 2: <input type="text" name="depth_range2">
+        <input type="Submit" value="Run">
+    </form>
+<br/><br/>
+
+<br/><br/>
+<form name="my_query_specific" action = "/my_query_specific" method = "get" enctype = "multipart/form-data">
+        Enter the total number of random queries: <input type="text" name="no_of_queries"> Depth Range 1: <input type="text" name="depth_range1"> Depth Range 2: <input type="text" name="depth_range2">
+        <input type="Submit" value="Run 6">
+    </form>
+<br/><br/>
+
+
+    <form name="random_queries" action = "/random_queries" method = "get" enctype = "multipart/form-data">
+        Enter the number of random queries: <input type="text" name="nqueries">
+        <input type="Submit" value="Run Random Queries">
+    </form>
+<br/><br/>
+<form name="query_specific" action = "/query_specific" method = "get" enctype = "multipart/form-data">
+        Enter the number of random queries: <input type="text" name="nqueries"> Low: <input type="text" name="low"> High: <input type="text" name="high">
+        <input type="Submit" value="Run Specific Queries">
+    </form>
+<br/><br/>
+
+<br/><br/>
+<form name="display_range" action = "/display_range" method = "get" enctype = "multipart/form-data">
+        Enter the number of queries: <input type="text" name="no_queries"> Low Range: <input type="text" name="low_range"> High Range: <input type="text" name="high_range">
+        <input type="Submit" value="Run">
+    </form>
+<br/><br/>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="false"></span></button>
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</center>
+
+</body>
+</html>
