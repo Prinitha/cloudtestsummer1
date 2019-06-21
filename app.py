@@ -190,9 +190,9 @@ def q6():
     # xy_chart.x_labels = map(str, range(lyear, hyear+interval, interval))
     # codes = ["IND","AFG"]
     # for code in codes:
-    sql = "select TotalPop, Registered from voting where TotalPop between " + range1 + " and " + range2 + ""
+    sql = "select TotalPop, Registered from voting where TotalPop between ? and ?"
     # print(sql)
-    result = cursor.execute(sql).fetchall()
+    result = cursor.execute(sql, (range1, range2)).fetchall()
     totpop = []
     registered = []
     # country = result[0][0]
