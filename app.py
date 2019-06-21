@@ -207,7 +207,7 @@ def q6():
     for i in range(0, len(totpop)):
         xy_chart.add(str(totpop[i]), abc)
     # xy_chart.add(country, abc)
-
+    xy_chart.render()
     return render_template('question9.html', chart=xy_chart.render_data_uri())
 
 @app.route('/question1', )
