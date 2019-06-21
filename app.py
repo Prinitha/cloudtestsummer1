@@ -177,8 +177,8 @@ def my_display_range_6():
 @app.route('/q6', methods=['GET'])
 def q6():
     # code = request.args.get('code')
-    # lyear = int(request.args.get('lyear'))
-    # hyear = int(request.args.get('hyear'))
+    range1 = int(request.args.get('range1'))
+    range2 = int(request.args.get('range2'))
     # interval = int(request.args.get('inter'))
     cursor = conn.cursor()
     xy_chart = pygal.XY(stroke=False)
@@ -190,7 +190,7 @@ def q6():
     # xy_chart.x_labels = map(str, range(lyear, hyear+interval, interval))
     # codes = ["IND","AFG"]
     # for code in codes:
-    sql = "select TotalPop, Registered from voting where TotalPop between 3000 and 10000"
+    sql = "select TotalPop, Registered from voting where TotalPop between range1 and range2"
     # print(sql)
     result = cursor.execute(sql).fetchall()
     totpop = []
@@ -208,7 +208,7 @@ def q6():
         xy_chart.add(str(totpop[i]), abc)
     # xy_chart.add(country, abc)
     xy_chart.render()
-    return render_template('question9.html', chart=xy_chart.render_data_uri())
+    return render_template('question9.html', range1=range1, range2=range2, chart=xy_chart.render_data_uri())
 
 @app.route('/question1', )
 def question1():
