@@ -56,6 +56,7 @@ def q5():
 @app.route('/q7', methods=['GET'])
 def q7():
     cursor = conn.cursor()
+    "select entity, BLPercent from educationshare where Code = " + "'" + code + "'"
     interval = request.args['interval']
     sql = "select" \
           " case " \
@@ -173,6 +174,41 @@ def my_display_range_6():
     return render_template("test.html", chart=pie_chart.render_data_uri())
 
 
+@app.route('/q6', methods=['GET'])
+def q6():
+    # code = request.args.get('code')
+    # lyear = int(request.args.get('lyear'))
+    # hyear = int(request.args.get('hyear'))
+    # interval = int(request.args.get('inter'))
+    cursor = conn.cursor()
+    xy_chart = pygal.XY(stroke=False)
+    xy_chart.title = 'Total Pop (in %)'
+    # years = []
+    # for i in range(lyear, hyear + interval, interval):
+    #     years.append(i)
+    # print(years)
+    # xy_chart.x_labels = map(str, range(lyear, hyear+interval, interval))
+    # codes = ["IND","AFG"]
+    # for code in codes:
+    sql = "select TotalPop, Registered from voting where TotalPop between 3000 and 10000"
+    # print(sql)
+    result = cursor.execute(sql).fetchall()
+    totpop = []
+    registered = []
+    # country = result[0][0]
+    # print('country')
+    # print(country)
+    for i in range(len(result)):
+        totpop.append(result[i][0])
+        registered.append(result[i][1])
+    # print('bl')
+    # print(bl_values)
+    abc = list(zip(totpop, registered))
+    for i in range(0, len(totpop)):
+        xy_chart.add(totpop[i], abc)
+    # xy_chart.add(country, abc)
+
+    return render_template('question9.html', chart=xy_chart.render_data_uri())
 
 @app.route('/question1', )
 def question1():
