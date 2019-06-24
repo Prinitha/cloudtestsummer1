@@ -184,7 +184,7 @@ def q6():
     # interval = int(request.args.get('inter'))
     cursor = conn.cursor()
     xy_chart = pygal.XY(stroke=False)
-    xy_chart.title = 'Total Pop (in %)'
+    xy_chart.title = 'Total Pop over registered'
     # years = []
     # for i in range(lyear, hyear + interval, interval):
     #     years.append(i)
