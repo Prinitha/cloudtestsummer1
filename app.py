@@ -208,7 +208,7 @@ def q6():
     # xy_chart.x_labels = map(str, range(lyear, hyear+interval, interval))
     # codes = ["IND","AFG"]
     # for code in codes:
-    sql = "select TotalPop, Registered from voting where TotalPop between ? and ?"
+    sql = "select TotalPop, Registered,StateName  from voting where TotalPop between ? and ?"
     # print(sql)
     result = cursor.execute(sql, (range1, range2)).fetchall()
     totpop = []
@@ -223,7 +223,7 @@ def q6():
     # print(bl_values)
     # abc = list(zip(totpop, registered))
     for i in range(0, len(totpop)):
-        xy_chart.add(str(totpop[i]), registered[i])
+        xy_chart.add(result[i][2], (totpop[i], registered[i]))
     # xy_chart.add(country, abc)
     xy_chart.render()
     return render_template('question9.html', range1=range1, range2=range2, chart=xy_chart.render_data_uri())
