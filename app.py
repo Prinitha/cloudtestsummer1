@@ -79,7 +79,7 @@ def q7():
         pie_chart.add(row[0], row[1])
     pie_chart.render()
     # return render_template('question3.html', chart=pie_chart.render_data_uri())
-    return render_template("test.html", chart=pie_chart.render_data_uri())
+    return render_template("question9.html", chart=pie_chart.render_data_uri())
 
 
 @app.route('/q8', methods=['GET'])
