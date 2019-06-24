@@ -10,7 +10,7 @@ app = Flask(__name__)
 conn = pypyodbc.connect(
     "Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,"
     "1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,"
-    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
+    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;")
 
 
 # redis_connect_dict = {}
@@ -60,6 +60,7 @@ def q7():
     # SELECT StateName, TotalPop/1000.0 as 'PopInMillions' from StateVoting where TotalPop/1000.0 > 0 and TotalPop/1000.0 < 3
 
     interval = int(request.args['interval'])
+
     start = 0
     case_clause = "case "
     end = start + interval
