@@ -39,6 +39,7 @@ conn = pypyodbc.connect(
 def hello_world():
     return render_template('common.html', )
 
+
 @app.route('/q5', methods=['GET'])
 def q5():
     cursor1 = conn.cursor()
@@ -67,7 +68,7 @@ def q7():
           " when TotalPop >= 40001 and TotalPop <= 50000  then \'40-50\' " \
           " when TotalPop >= 50001 and TotalPop <= 60000  then \'50-60\' " \
           " when TotalPop >= 60001 and TotalPop <= 70000  then \'60-70\' " \
-          " when TotalPop >= 70001 and TotalPop <= 80000  then \'70-80\' "\
+          " when TotalPop >= 70001 and TotalPop <= 80000  then \'70-80\' " \
           " when TotalPop >= 80001 and TotalPop <= 90000  then \'80-90\' " \
           " when TotalPop >= 90001 and TotalPop <= 100000  then \'90-100\' " \
           " end As 'Range'," \
@@ -82,7 +83,7 @@ def q7():
           " when TotalPop >= 40001 and TotalPop <= 50000  then \'40-50\' " \
           " when TotalPop >= 50001 and TotalPop <= 60000  then \'50-60\' " \
           " when TotalPop >= 60001 and TotalPop <= 70000  then \'60-70\' " \
-          " when TotalPop >= 70001 and TotalPop <= 80000  then \'70-80\' "\
+          " when TotalPop >= 70001 and TotalPop <= 80000  then \'70-80\' " \
           " when TotalPop >= 80001 and TotalPop <= 90000  then \'80-90\' " \
           " when TotalPop >= 90001 and TotalPop <= 100000  then \'90-100\' " \
           "end;"
@@ -95,6 +96,25 @@ def q7():
     pie_chart.render()
     # return render_template('question3.html', chart=pie_chart.render_data_uri())
     return render_template("test.html", chart=pie_chart.render_data_uri())
+
+
+@app.route('/q8', methods=['GET'])
+def q8():
+    cubeval = int(request.args.get('cubeval'))
+    line_chart = pygal.HorizontalBar()
+    cube_list = []
+    for i in range(1, len(cubeval + 1)):
+        val = ((i * i * i) % 10)
+        cube_list.append(val)
+    my_dict = {i: cube_list.count(i) for i in cube_list}
+
+
+    line_chart.title = 'Cube :'
+
+    for i in my_dict:
+        line_chart.add(str(my_dict.keys(i)), my_dict.values(i))
+    line_chart.render()
+    return render_template('q8html.html', cubeval=cubeval, chart=line_chart.render_data_uri())
 
 
 @app.route('/my_display_range_5', methods=['GET'])
@@ -141,27 +161,27 @@ def my_display_range_6():
     cursor = conn.cursor()
 
     sql = "select" \
-" case " \
-		   " when PercentVote >=40 and PercentVote <=45 then \'40-45\'" \
-		   " when PercentVote >=45.01  and PercentVote <= 50    then \'45-50\' "\
-           " when PercentVote >= 50.01 and PercentVote <= 55   then \'50-55\' "\
-           " when PercentVote >= 55.01 and PercentVote <= 60  then \'55-60\' "\
-           " when PercentVote >= 60.01 and PercentVote <= 65  then \'60-65\' "\
-		   " when PercentVote >= 65.01 and PercentVote <= 70  then \'65-70\' "\
-		   " when PercentVote >= 70.01 and PercentVote <= 75  then \'70-75\' "\
-" end As 'PercentVote',"\
-"count(*) as Number " \
-"from StateVoting" \
-" group by " \
-"case " \
-		   " when PercentVote >=40 and PercentVote <=45 then \'40-45\'" \
-		   " when PercentVote >=45.01  and PercentVote <= 50    then \'45-50\'"\
-           " when PercentVote >= 50.01 and PercentVote <= 55   then \'50-55\' "\
-           " when PercentVote >= 55.01 and PercentVote <= 60  then \'55-60\' "\
-           " when PercentVote >= 60.01 and PercentVote <= 65  then \'60-65\' "\
-		   " when PercentVote >= 65.01 and PercentVote <= 70  then \'65-70\' " \
-		   " when PercentVote >= 70.01 and PercentVote <= 75  then \'70-75\' " \
-"end;"
+          " case " \
+          " when PercentVote >=40 and PercentVote <=45 then \'40-45\'" \
+          " when PercentVote >=45.01  and PercentVote <= 50    then \'45-50\' " \
+          " when PercentVote >= 50.01 and PercentVote <= 55   then \'50-55\' " \
+          " when PercentVote >= 55.01 and PercentVote <= 60  then \'55-60\' " \
+          " when PercentVote >= 60.01 and PercentVote <= 65  then \'60-65\' " \
+          " when PercentVote >= 65.01 and PercentVote <= 70  then \'65-70\' " \
+          " when PercentVote >= 70.01 and PercentVote <= 75  then \'70-75\' " \
+          " end As 'PercentVote'," \
+          "count(*) as Number " \
+          "from StateVoting" \
+          " group by " \
+          "case " \
+          " when PercentVote >=40 and PercentVote <=45 then \'40-45\'" \
+          " when PercentVote >=45.01  and PercentVote <= 50    then \'45-50\'" \
+          " when PercentVote >= 50.01 and PercentVote <= 55   then \'50-55\' " \
+          " when PercentVote >= 55.01 and PercentVote <= 60  then \'55-60\' " \
+          " when PercentVote >= 60.01 and PercentVote <= 65  then \'60-65\' " \
+          " when PercentVote >= 65.01 and PercentVote <= 70  then \'65-70\' " \
+          " when PercentVote >= 70.01 and PercentVote <= 75  then \'70-75\' " \
+          "end;"
 
     cursor.execute(sql, )
     rows = cursor.fetchall()
@@ -210,6 +230,7 @@ def q6():
     xy_chart.render()
     return render_template('question9.html', range1=range1, range2=range2, chart=xy_chart.render_data_uri())
 
+
 @app.route('/question1', )
 def question1():
     return render_template('question1.html')
@@ -248,7 +269,6 @@ def question1_execute():
     state = []
     # i=0
     for r in result:
-
         # state.append(str(r[0]))
         population_values.append(r[1])
         # state = r[0]
@@ -590,7 +610,6 @@ if __name__ == '_main_':
 # #     app.run()
 
 
-
 # changes = 0
 # # required imports
 # from flask import *
@@ -764,13 +783,3 @@ if __name__ == '_main_':
 #     app.run()
 #
 #
-
-
-
-
-
-
-
-
-
-
