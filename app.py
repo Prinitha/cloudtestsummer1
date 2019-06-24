@@ -102,17 +102,15 @@ def q7():
 def q8():
     cubeval = int(request.args.get('cubeval'))
     line_chart = pygal.HorizontalBar()
+    line_chart.title = 'Cube :'
     cube_list = []
     for i in range(1, (cubeval + 1)):
         val = ((i * i * i) % 10)
         cube_list.append(val)
     my_dict = {i: cube_list.count(i) for i in cube_list}
 
-
-    line_chart.title = 'Cube :'
-
-    for i in my_dict:
-        line_chart.add(i, my_dict[i])
+    for j in my_dict:
+        line_chart.add(str(j), my_dict[j])
     line_chart.render()
     return render_template('q8html.html', cubeval=cubeval, chart=line_chart.render_data_uri())
 
