@@ -211,19 +211,8 @@ def q6():
     sql = "select TotalPop, Registered,StateName  from voting where TotalPop between ? and ?"
     # print(sql)
     result = cursor.execute(sql, (range1, range2)).fetchall()
-    totpop = []
-    registered = []
-    # country = result[0][0]
-    # print('country')
-    # print(country)
-    for i in range(len(result)):
-        totpop.append(result[i][0])
-        registered.append(result[i][1])
-    # print('bl')
-    # print(bl_values)
-    # abc = list(zip(totpop, registered))
-    for i in range(0, len(totpop)):
-        xy_chart.add(result[i][2], (totpop[i], registered[i]))
+    for row in result:
+        xy_chart.add(row[2], (row[0], row[1]))
     # xy_chart.add(country, abc)
     xy_chart.render()
     return render_template('question9.html', range1=range1, range2=range2, chart=xy_chart.render_data_uri())
