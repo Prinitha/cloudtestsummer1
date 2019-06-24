@@ -59,7 +59,7 @@ def q7():
     cursor = conn.cursor()
     # SELECT StateName, TotalPop/1000.0 as 'PopInMillions' from StateVoting where TotalPop/1000.0 > 0 and TotalPop/1000.0 < 3
 
-    interval = request.args['interval']
+    interval = int(request.args['interval'])
     start = 0
     case_clause = "case "
     end = start + interval
