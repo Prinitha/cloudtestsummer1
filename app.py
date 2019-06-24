@@ -112,7 +112,7 @@ def q8():
     line_chart.title = 'Cube :'
 
     for i in my_dict:
-        line_chart.add(str(my_dict.keys(i)), my_dict.values(i))
+        line_chart.add(my_dict.keys(i), my_dict.values(i))
     line_chart.render()
     return render_template('q8html.html', cubeval=cubeval, chart=line_chart.render_data_uri())
 
