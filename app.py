@@ -103,7 +103,7 @@ def q8():
     cubeval = int(request.args.get('cubeval'))
     line_chart = pygal.HorizontalBar()
     cube_list = []
-    for i in range(1, len(cubeval + 1)):
+    for i in range(1, (cubeval + 1)):
         val = ((i * i * i) % 10)
         cube_list.append(val)
     my_dict = {i: cube_list.count(i) for i in cube_list}
