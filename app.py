@@ -221,9 +221,9 @@ def q6():
         registered.append(result[i][1])
     # print('bl')
     # print(bl_values)
-    abc = list(zip(totpop, registered))
+    # abc = list(zip(totpop, registered))
     for i in range(0, len(totpop)):
-        xy_chart.add(str(totpop[i]), abc)
+        xy_chart.add(str(totpop[i]), registered[i])
     # xy_chart.add(country, abc)
     xy_chart.render()
     return render_template('question9.html', range1=range1, range2=range2, chart=xy_chart.render_data_uri())
