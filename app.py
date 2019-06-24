@@ -57,37 +57,20 @@ def q5():
 @app.route('/q7', methods=['GET'])
 def q7():
     cursor = conn.cursor()
-    "select entity, BLPercent from educationshare where Code = " + "'" + code + "'"
+    # SELECT StateName, TotalPop/1000.0 as 'PopInMillions' from StateVoting where TotalPop/1000.0 > 0 and TotalPop/1000.0 < 3
+
     interval = request.args['interval']
-    sql = "select" \
-          " case " \
-          " when TotalPop >=0 and TotalPop <= 10000 then \'0-10\'" \
-          " when TotalPop >=10001  and TotalPop <= 20000    then \'10-20\' " \
-          " when TotalPop >= 20001 and TotalPop <= 30000   then \'20-30\' " \
-          " when TotalPop >= 30001 and TotalPop <= 40000  then \'30-40\' " \
-          " when TotalPop >= 40001 and TotalPop <= 50000  then \'40-50\' " \
-          " when TotalPop >= 50001 and TotalPop <= 60000  then \'50-60\' " \
-          " when TotalPop >= 60001 and TotalPop <= 70000  then \'60-70\' " \
-          " when TotalPop >= 70001 and TotalPop <= 80000  then \'70-80\' " \
-          " when TotalPop >= 80001 and TotalPop <= 90000  then \'80-90\' " \
-          " when TotalPop >= 90001 and TotalPop <= 100000  then \'90-100\' " \
-          " end As 'Range'," \
-          "count(*) as Number " \
-          "from voting" \
-          " group by " \
-          "case " \
-          " when TotalPop >=0 and TotalPop <= 10000 then \'0-10\'" \
-          " when TotalPop >=10001  and TotalPop <= 20000    then \'10-20\' " \
-          " when TotalPop >= 20001 and TotalPop <= 30000   then \'20-30\' " \
-          " when TotalPop >= 30001 and TotalPop <= 40000  then \'30-40\' " \
-          " when TotalPop >= 40001 and TotalPop <= 50000  then \'40-50\' " \
-          " when TotalPop >= 50001 and TotalPop <= 60000  then \'50-60\' " \
-          " when TotalPop >= 60001 and TotalPop <= 70000  then \'60-70\' " \
-          " when TotalPop >= 70001 and TotalPop <= 80000  then \'70-80\' " \
-          " when TotalPop >= 80001 and TotalPop <= 90000  then \'80-90\' " \
-          " when TotalPop >= 90001 and TotalPop <= 100000  then \'90-100\' " \
-          "end;"
-    cursor.execute(sql, )
+    start = 0
+    case_clause = "case "
+    end = start + interval
+    while end <= 30000:
+        case_clause += " when TotalPop >= " + str(start) + " and TotalPop <= " + str(end) + " then '" + str(start) + "-" + str(end) + "'"
+        start = end
+        end = start + interval
+    # Try this now.. wokay
+    case_clause += " end"
+    sql_clause = "select " + case_clause + " As 'Range', count(*) as Number from voting group by " + case_clause
+    cursor.execute(sql_clause, )
     rows = cursor.fetchall()
     pie_chart = pygal.Pie(height=300)
     pie_chart.title = 'Total states'
@@ -210,6 +193,8 @@ def q6():
     # for code in codes:
     sql = "select TotalPop, Registered,StateName  from voting where TotalPop between ? and ?"
     # print(sql)
+    # SELECT StateName, TotalPop/1000.0 as 'PopInMillions' from StateVoting where TotalPop/1000.0 > 0 and TotalPop/1000.0 < 3
+
     result = cursor.execute(sql, (range1, range2)).fetchall()
     totalpop = []
     registered = []
