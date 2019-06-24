@@ -212,7 +212,8 @@ def q6():
     # print(sql)
     result = cursor.execute(sql, (range1, range2)).fetchall()
     for row in result:
-        xy_chart.add(row[2], (row[0], row[1]))
+        abc = list(zip(row[0], row[1]))
+        xy_chart.add(row[2], abc)
     # xy_chart.add(country, abc)
     xy_chart.render()
     return render_template('question9.html', range1=range1, range2=range2, chart=xy_chart.render_data_uri())
