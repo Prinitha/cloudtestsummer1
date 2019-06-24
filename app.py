@@ -62,13 +62,13 @@ def q7():
     interval = int(request.args['interval'])
 
     start = 0
-    case_clause = "case "
+    case_clause = "case"
     end = start + interval
-    while end <= 30000:
-        case_clause += " when TotalPop >= " + str(start) + " and TotalPop <= " + str(end) + " then '" + str(start) + "-" + str(end) + "'"
+    while end <= 70:
+        case_clause += " when TotalPop/1000.0 >= " + str(start) + " and TotalPop/1000.0 <= " + str(end) + " then '" + str(start) + "-" + str(end) + "'"
         start = end
         end = start + interval
-    # Try this now.. wokay
+    # Try
     case_clause += " end"
     sql_clause = "select " + case_clause + " As 'Range', count(*) as Number from voting group by " + case_clause
     cursor.execute(sql_clause, )
