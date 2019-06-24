@@ -217,8 +217,10 @@ def q6():
         totalpop.append(row[0])
         registered.append(row[1])
     abc = list(zip(totalpop, registered))
+    i=0
     for row in result:
-        xy_chart.add(row[2], abc)
+        xy_chart.add(row[2], abc[i])
+        i = i+1
     # xy_chart.add(country, abc)
 
     xy_chart.render()
