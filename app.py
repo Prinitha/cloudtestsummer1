@@ -84,8 +84,9 @@ def q7():
 
 @app.route('/q8', methods=['GET'])
 def q8():
+    # code = request.args.get('code')
     cubeval = int(request.args.get('cubeval'))
-    line_chart = pygal.HorizontalBar()
+    xy_chart = pygal.XY(stroke=False)
     line_chart.title = 'Cube :'
     cube_list = []
     for i in range(1, (cubeval + 1)):
@@ -94,9 +95,9 @@ def q8():
     my_dict = {i: cube_list.count(i) for i in cube_list}
 
     for j in my_dict:
-        line_chart.add(str(j), my_dict[j])
-    line_chart.render()
-    return render_template('q8html.html', cubeval=cubeval, chart=line_chart.render_data_uri())
+        xy_chart.add(str(j), my_dict[j])
+    xy_chart.render()
+    return render_template('q8html.html', cubeval=cubeval, chart=xy_chart.render_data_uri())
 
 
 @app.route('/my_display_range_5', methods=['GET'])
