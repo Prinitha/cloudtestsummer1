@@ -95,7 +95,7 @@ def q8():
     my_dict = {i: cube_list.count(i) for i in cube_list}
 
     for j in my_dict:
-        xy_chart.add(str(j), [(j,my_dict[j])])
+        xy_chart.add(str(j), [(j, my_dict[j])])
     xy_chart.render()
     return render_template('q8html.html', cubeval=cubeval, chart=xy_chart.render_data_uri())
 
@@ -179,13 +179,14 @@ def my_display_range_6():
 
 @app.route('/q6', methods=['GET'])
 def q6():
+
     # code = request.args.get('code')
     range1 = int(request.args.get('range1'))
     range2 = int(request.args.get('range2'))
     # interval = int(request.args.get('inter'))
     cursor = conn.cursor()
-    xy_chart = pygal.XY(stroke=False)
-    xy_chart.title = 'Total Pop over registered'
+    pie_chart = pygal.Pie(height=300)
+    pie_chart.title = 'Total Pop over registered'
     # years = []
     # for i in range(lyear, hyear + interval, interval):
     #     years.append(i)
@@ -206,12 +207,12 @@ def q6():
     # abc = list(zip(totalpop, registered))
     # i=0
     for row in result:
-        xy_chart.add(row[2], [(row[0], row[1])])
+        pie_chart.add(row[0], row[1])
         # i = i+1
     # xy_chart.add(country, abc)
 
-    xy_chart.render()
-    return render_template('question9.html', range1=range1, range2=range2, chart=xy_chart.render_data_uri())
+    pie_chart.render()
+    return render_template('question9.html', range1=range1, range2=range2, chart=pie_chart.render_data_uri())
 
 
 @app.route('/question1', )
