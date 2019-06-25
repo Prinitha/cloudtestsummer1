@@ -179,6 +179,34 @@ def my_display_range_6():
 
 @app.route('/q6', methods=['GET'])
 def q6():
+    cursor = conn.cursor()
+    # SELECT StateName, TotalPop/1000.0 as 'PopInMillions' from StateVoting where TotalPop/1000.0 > 0 and TotalPop/1000.0 < 3
+
+    interval = int(request.args['interval'])
+
+    start = 0
+    case_clause = "case"
+    end = start + interval
+    while end <= 70:
+        case_clause += " when TotalPop/1000.0 >= " + str(start) + " and TotalPop/1000.0 <= " + str(
+            end) + " then '" + str(start) + "-" + str(end) + "'"
+        start = end
+        end = start + interval
+    # Try
+    case_clause += " end"
+    sql_clause = "select " + case_clause + " As 'Range', count(*) as Number from voting group by " + case_clause
+    cursor.execute(sql_clause, )
+    rows = cursor.fetchall()
+    pie_chart = pygal.Pie(height=300)
+    pie_chart.title = 'Total states'
+    for row in rows:
+        pie_chart.add(row[0], row[1])
+    pie_chart.render()
+    # return render_template('question3.html', chart=pie_chart.render_data_uri())
+    return render_template("question9.html", chart=pie_chart.render_data_uri())
+
+
+
 
     # code = request.args.get('code')
     range1 = int(request.args.get('range1'))
@@ -207,7 +235,7 @@ def q6():
     # abc = list(zip(totalpop, registered))
     # i=0
     for row in result:
-        pie_chart.add(row[0], row[1])
+        pie_chart.add(row[2], [(row[0], row[1])])
         # i = i+1
     # xy_chart.add(country, abc)
 
