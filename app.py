@@ -87,7 +87,7 @@ def q8():
     # code = request.args.get('code')
     cubeval = int(request.args.get('cubeval'))
     xy_chart = pygal.XY(stroke=False)
-    line_chart.title = 'Cube :'
+    xy_chart.title = 'Cube :'
     cube_list = []
     for i in range(1, (cubeval + 1)):
         val = ((i * i * i) % 10)
