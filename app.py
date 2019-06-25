@@ -95,7 +95,7 @@ def q8():
     my_dict = {i: cube_list.count(i) for i in cube_list}
 
     for j in my_dict:
-        xy_chart.add(str(j), my_dict[j])
+        xy_chart.add(str(j), (j,my_dict[j]))
     xy_chart.render()
     return render_template('q8html.html', cubeval=cubeval, chart=xy_chart.render_data_uri())
 
