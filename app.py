@@ -73,13 +73,13 @@ def q7():
     sql_clause = "select " + case_clause + " As 'Range', count(*) as Number from voting group by " + case_clause
     cursor.execute(sql_clause, )
     rows = cursor.fetchall()
-    pie_chart = pygal.Pie(height=300)
-    pie_chart.title = 'Total states'
+    line_chart = pygal.Bar()
+    line_chart.title = 'Total states'
     for row in rows:
-        pie_chart.add(row[0], row[1])
-    pie_chart.render()
+        line_chart.add(str(row[0]), row[1])
+    line_chart.render()
     # return render_template('question3.html', chart=pie_chart.render_data_uri())
-    return render_template("question9.html", chart=pie_chart.render_data_uri())
+    return render_template("question9.html", chart=line_chart.render_data_uri())
 
 
 @app.route('/q8', methods=['GET'])
