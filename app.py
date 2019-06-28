@@ -6,11 +6,11 @@ import pypyodbc as db
 import pygal
 
 app = Flask(__name__)
-# conn = db.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:cloud3dbserver.database.windows.net,1433;Database=cloud3db;Uid=dbuser@cloud3dbserver;Pwd={insert db password here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
+
 conn = pypyodbc.connect(
-    "Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,"
-    "1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,"
-    "1433;Pwd=chintu@1;Encrypt=yes;TrustServerCertificate=no;")
+    "Driver={ODBC Driver 17 for SQL Server};Server={insert server name here},"
+    "{port};Database=DATABASE;Uid={insert UID here},"
+    "{port};Pwd={insert your password};Encrypt=yes;TrustServerCertificate=no;")
 
 
 # redis_connect_dict = {}
@@ -496,12 +496,7 @@ if __name__ == '_main_':
 # # import ast
 # # from time import time
 # # app = Flask(__name__)
-# # connection = pypyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:pxn8557.database.windows.net,1433;Database=DATABASE;Uid=prinitha@pxn8557.database.windows.net,1433;Pwd=chintu@1;")
-# # cursor = connection.cursor()
-# # app.secret_key = "Secret!!!!"
-# # host_name = 'cloudredis.redis.cache.windows.net'
-# # password = 'Nbez9mJY7hUbFWLFAgWp7OJXyku9XIXep7waffZg4z8='
-# # cache = redis.StrictRedis(host=host_name, port=6380, password=password, ssl=True)
+
 # #
 # #
 # # @app.route('/')
@@ -655,16 +650,10 @@ if __name__ == '_main_':
 # # if 'WEBSITE_INSTANCE_ID' in os.environ:
 # #     isRemote = True
 # #     debug = False
-# #     radis_hostname = "adbapplication.redis.cache.windows.net"
-# #     radis_password = "03QdGeHqNJbvldXvRMilQuWj6Mki+cYHMJ9UBVEVyn1c="
-# #     radis_port = "6380"
+# #    
 # #     radis_ssl = True
 # # else:
-# #     port = 80
-# #     host = '127.65.43.21'
-# #     radis_hostname = "localhost"
-# #     radis_password = ""
-# #     radis_port = 6379
+
 # #     radis_ssl = False
 #
 # r = redis.StrictRedis(host=radis_hostname, port=radis_port, db=0, password=radis_password, ssl=radis_ssl)
